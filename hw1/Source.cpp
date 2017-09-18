@@ -17,7 +17,7 @@ void book::define_author(string ISBN, string author) {
 	}
 }
 
-void book::define_edition(string ISBN, unsigned int edition) {
+void book::define_edition(string ISBN, int edition) {
 	if (ISBN == ISBN) {
 		edition = edition;
 	}
@@ -26,7 +26,7 @@ void book::define_edition(string ISBN, unsigned int edition) {
 	}
 }
 
-void define_date(string ISBN, string date) {
+void book::define_date(string ISBN, string date) {
 	if (ISBN == ISBN) {
 		date = date;
 	}
@@ -34,7 +34,7 @@ void define_date(string ISBN, string date) {
 		cout << "No book with the specified ISBN was found.";
 	}
 }
-void define_cost(string ISBN, double cost, char condition) {
+void book::define_cost(string ISBN, double cost, char condition) {
 	if (ISBN == ISBN) {
 		cost = cost;
 		condition = condition;
@@ -45,9 +45,7 @@ void define_cost(string ISBN, double cost, char condition) {
 }
 
 //TODO: figure out how to assign books to hash map
-void assign_book() {
-
-}
+void assign_book();
 
 //functions that print
 //std::vector<std::string> print_all();
@@ -57,3 +55,52 @@ void assign_book() {
 //std::vector<std::string> print_def_courses();
 //std::vector<std::string> print_dept_books();
 //double print_avg_cost();
+void book::print_book() {
+	string output;
+	output = "ISBN: " + ISBN + "\ntitle: " + title + "\n";
+	if (author.size() != 0) output = output + "author: " + author + "\n";
+	if (edition > 0)output = output + "edition: " + to_string(edition) + "\n";
+	if (date.size() != 0)output = output + "date of publication:" + date + "\n";
+	if (cost > 0)output = output + " cost: " + to_string(cost) + "\n";
+	if (condition != '-')output = output + "condition: " + condition + "\n";
+	if (section_num > 0)output = output + "section number: " + to_string(section_num) + "\n";
+	cout << output;
+}
+
+void course::print_course() {
+	string output;
+	output = "department code: " + dept_code + "\n" +
+		"course number: " + to_string(course_num) + "\n" +
+		"name: " + name + "\n";
+	if (section_num >= 0)output = output + "section number: " + to_string(section_num) + "\n";
+	cout << output;
+}
+
+//helper functions that don't belong in a class
+//This function splits up the inputted line by spaces and returns each part of the line
+//in a vector of strings.
+vector<string> split(string raw) {
+	vector<string> fill_this;
+	string token;
+	for (int i = 0; i < raw.length(); i++) {
+		char thing = raw[i];
+		if (thing == ' ') {
+			fill_this.push_back(token);
+			token = "";
+		}
+		else token += thing;
+	}
+	if (token != "")fill_this.push_back(token);
+	return fill_this;
+}
+
+//this function tries to find a matching isbn in the vector of books
+int match(vector<book> books, string temp_isbn) {
+	for (int i = 0; i < books.size(); i++) {
+		if (books[i].ISBN == temp_isbn) {
+			return i;
+		}
+	}
+	//if ISBN is not found, return a -1
+	return -1;
+}

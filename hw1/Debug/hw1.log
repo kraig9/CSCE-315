@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\kraig\documents\github\csce-315\hw1\source.cpp(85): warning C4018: '<': signed/unsigned mismatch
+c:\users\kraig\documents\github\csce-315\hw1\source.cpp(99): warning C4018: '<': signed/unsigned mismatch
+LINK : fatal error LNK1168: cannot open C:\Users\Kraig\Documents\GitHub\CSCE-315\hw1\Debug\hw1.exe for writing
